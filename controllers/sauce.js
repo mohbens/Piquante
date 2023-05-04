@@ -32,7 +32,7 @@ exports.getOneSauce = (req, res, next) => {
 
 // pour modifier la sauce avec PUT
 exports.modifySauce = (req, res, next) => {
-  const sauceObject = req.file ? {
+  const sauceObject = req.file ? {  /*si la modification contient une image */
     ...JSON.parse(req.body.sauce),
     imageUrl: `${req.file.filename}`,
   } : { ...req.body };
@@ -45,9 +45,7 @@ exports.modifySauce = (req, res, next) => {
         Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
           .then(() => {
             if (sauce.imageUrl !== sauceObject.imageUrl) {
-              fs.unlink(`images/${sauce.imageUrl}`, async () => {
-
-              });
+              fs.unlink(`images/${sauce.imageUrl}`, async () => { }); /*on supprime l'ancienne image du dossier image */
             }
             return res.status(200).json({ message: 'Objet modifié!' })
           })

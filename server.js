@@ -1,9 +1,9 @@
-require('dotenv').config();
+require('dotenv').config(); //pour les variables d'environnement 
 const http = require('http');
 const app = require('./app');
 
 
-
+// faire un random pour generer un Token a chaque fois que le Server est en marche
 const randomString = (nbChars) => {
     const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let result = '';
@@ -12,6 +12,8 @@ const randomString = (nbChars) => {
   }
 
 process.env.RANDOM_TOKEN = randomString(10);
+
+
 
 const port = process.env.PORT || 3000;
 app.set('port', port);
