@@ -120,7 +120,7 @@ exports.likeDislikeSauce = (req, res, next) => {
           .catch((error) => { res.status(400).json({ error }) });
       } else {
         message = "action deja faite "
-        throw message //401
+        throw message 
       }
     })
     .catch((error) => res.status(401).json({ error }));
