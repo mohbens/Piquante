@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+// plugin pour utiliser une seule fois le userID
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
