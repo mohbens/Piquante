@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // creer une sauce pour le POST
 exports.createSauce = (req, res, next) => {
+const sauceObject = JSON.parse(req.body.sauce);
   sauceObject.userId = req.auth.userId;
   sauceObject.imageUrl = `${req.file.filename}`;
   const sauce = new Sauce(sauceObject);
@@ -37,6 +38,7 @@ exports.modifySauce = (req, res, next) => {
     imageUrl: `${req.file.filename}`,
   } : { ...req.body };
   delete sauceObject;
+  
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
       if (sauce.userId != req.auth.userId) {
@@ -118,7 +120,7 @@ exports.likeDislikeSauce = (req, res, next) => {
           .catch((error) => { res.status(400).json({ error }) });
       } else {
         message = "action deja faite "
-        throw message
+        throw message //401
       }
     })
     .catch((error) => res.status(404).json({ error }));
